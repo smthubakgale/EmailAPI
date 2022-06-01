@@ -1,0 +1,138 @@
+﻿
+
+<div>
+
+    <div style="width:400px; margin:auto;">
+        <input id="em" placeholder="Enter Email Address" value="smthubakgale@gmail.com" /><br />
+        <input id="sb" placeholder="Subject" value="texting" /><br /><br />
+        <textarea id="bd" style="width:200px; min-height:100px; "> The Body is Here </textarea><br /><br />
+        <button onclick="sndButton()"> Send </button>
+    </div>
+
+    <div style="width:400px; margin:auto; margin-top:20px;">
+        <div style="display:flex; margin-top:10px;">
+            <div>
+                <input id="em_idx" type="number" value="1" style="width:60px; " />
+            </div>
+            <div style="margin-left:10px;">
+                <input id="em_add" type="email" value="smthubakgale@gmail.com" />
+            </div>
+            <div style="flex:1;"></div>
+            <div>
+                <button onclick="addEm()"> ADD </button>
+            </div>
+        </div>
+        <div style="display:flex; margin-top:10px;">
+            <div>
+                <input id="em_idx" type="number" value="1" style="width:60px; " />
+            </div>
+            <div style="margin-left:10px;">
+                <input id="em_rem" type="email" value="smthubakgale@gmail.com" />
+            </div>
+            <div style="flex:1;"></div>
+            <div>
+                <button onclick="remEm()"> REMOVE </button>
+            </div>
+        </div>
+        <div style="display:flex; margin-top:10px;">
+            <div>
+                Email List : 
+            </div>
+            <div style="flex:1;"></div>
+            <div>
+                <button onclick="clrEm()"> CLEAR </button>
+            </div>
+            <div style="flex:1;"></div>
+            <div>
+                <button onclick="recEm()"> RECEIVE </button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function clrEm()
+        {
+            $.ajax({
+                url: '/Home/Clear',
+                type: 'GET',
+                data: null , 
+                success: function (data) {
+                    alert(data);
+                },
+                error: function () {
+                    alert("error");
+                }
+            });
+        }
+        function recEm()
+        {
+            $.ajax({
+                url: '/Home/Receive',
+                type: 'GET',
+                data: null , 
+                success: function (data) {
+                    alert(data);
+                },
+                error: function () {
+                    alert("error");
+                }
+            });
+        }
+        function addEm()
+        {
+            $.ajax({
+                url: '/Home/Add',
+                type: 'GET',
+                data: {
+                    Idx: $("#em_idx").val() ,
+                    email: $("#em_add").val()
+                },
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    alert(data);
+                },
+                error: function () {
+                    alert("error");
+                }
+            });
+        }
+        function remEm()
+        {
+            $.ajax({
+                url: '/Home/Remove',
+                type: 'GET',
+                data: {
+                    Idx: $("#em_idx2").val() ,
+                    email: $("#em_rem").val() 
+                },
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    alert(data);
+                },
+                error: function () {
+                    alert("error");
+                }
+            });
+        }
+        function sndButton() {
+             
+            $.ajax({
+                url: '/Home/Test',
+                type: 'GET',
+                data: {
+                    email: $("#em").val() ,
+                    subject: $("#sb").val() ,
+                    body: $("#bd").val()
+                },
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    alert(data);
+                },
+                error: function () {
+                    alert("error");
+                }
+            });
+        }
+    </script>
+</div>
